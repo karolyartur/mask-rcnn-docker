@@ -1,5 +1,5 @@
 FROM ubuntu:16.04
-MAINTAINER Cuda Chen <clh960524@gmail.com>
+MAINTAINER Artur Istvan Karoly <artur.karoly@irob.uni-obuda.hu>
 
 ENV TEMP_MRCNN_DIR /tmp/mrcnn
 ENV TEMP_COCO_DIR /tmp/coco
@@ -87,7 +87,7 @@ RUN pip3 install --no-cache-dir git+https://github.com/waleedka/coco.git#subdire
 #ENV MRCNN_DIR /mrcnn
 
 # NOTE: cloning my Mask R-CNN master (might be unstable HEAD)
-RUN git clone https://github.com/Cuda-Chen/Mask_RCNN.git $TEMP_MRCNN_DIR
+RUN git clone https://github.com/karolyartur/Mask_RCNN.git $TEMP_MRCNN_DIR
 
 RUN git clone https://github.com/waleedka/coco.git $TEMP_COCO_DIR
 
@@ -99,6 +99,8 @@ RUN cd $TEMP_COCO_DIR/PythonAPI && \
     make
 
 RUN mkdir -p $MRCNN_DIR/coco
+
+RUN mkdir -p /usr/src/datasets
 
 WORKDIR "/root"
 CMD ["/bin/bash"]
